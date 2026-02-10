@@ -1,0 +1,15 @@
+With Birlestirme as(SELECT 
+    o.customer_id,
+    Sum(i.price) as Totalprice, 
+    Count(o.order_id) as siparis_sayisi,
+FROM `project-42491229-3d06-45f9-908.olist.olist_orders_dataset` as o 
+JOIN `project-42491229-3d06-45f9-908.olist.olist_order_items_dataset_new` as i 
+On  o.order_id=i.order_id
+Group by o.customer_id
+)
+
+SELECT b.*, c.customer_city,c.customer_state
+From Birlestirme as b
+JOIN `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` as c
+On b.customer_id=c.customer_id
+ORDER BY Totalprice desc
