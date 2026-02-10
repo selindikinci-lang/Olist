@@ -1,0 +1,7 @@
+-- negatif değerşer kaldırılıp yeni tablo oluşturuldu--
+CREATE TABLE `project-42491229-3d06-45f9-908.olist.olist_order_payments_dataset_new`  AS
+SELECT *
+FROM `project-42491229-3d06-45f9-908.olist.olist_order_payments_dataset` 
+WHERE payment_value >= 0;
+
+

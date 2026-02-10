@@ -1,0 +1,5 @@
+--tekrarlanan verileri ayıklama işlemi--
+SELECT customer_id 
+FROM `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` 
+Group By customer_id
+Having count(customer_id) >1
