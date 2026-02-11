@@ -25,3 +25,21 @@ from tarih_verileri as tar
 JOIN `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` AS cust on tar.customer_id=cust.customer_id
 JOIN `project-42491229-3d06-45f9-908.olist.olist_geolocation_dataset` AS geo on cust.customer_zip_code_prefix=geo.geolocation_zip_code_prefix
 where order_status ="delivered"
+
+
+
+
+
+
+SELECT 
+  ROUND(AVG(r.review_score)) AS ortalama_puan,
+  ROUND(AVG(DATE_DIFF(DATE(o.order_estimated_delivery_date), DATE(o.order_delivered_customer_date), DAY))) AS tahmin_edilen_ile_gerceklesen_arasindaki_fark_ortalamasi,
+  ROUND(CORR(r.review_score, DATE_DIFF(DATE(o.order_estimated_delivery_date), DATE(o.order_delivered_customer_date), DAY)),2) AS korelasyon
+      FROM `project-42491229-3d06-45f9-908.olist.olist_order_reviews_dataset` AS r
+      JOIN `project-42491229-3d06-45f9-908.olist.olist_orders_dataset` AS o
+            ON r.order_id = o.order_id
+      JOIN `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` AS c
+            ON o.customer_id = c.customer_id
+
+
+--Teslimat süresi ile Score arasındaki ilişkinin Korelasyonu--
