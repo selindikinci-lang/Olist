@@ -1,0 +1,27 @@
+with tarih_verileri AS
+
+      (SELECT order_id, customer_id,order_status,
+      date(order_purchase_timestamp) as order_purchase_timestamp, 
+      date(order_approved_at) as order_approved_at, 
+      date(order_delivered_carrier_date) as order_delivered_carrier_date,
+      date(order_delivered_customer_date) as order_delivered_customer_date, 
+      date(order_estimated_delivery_date)  as order_estimated_delivery_date
+FROM `project-42491229-3d06-45f9-908.olist.olist_orders_dataset` )
+
+
+select 
+              tar.order_id, 
+              tar.customer_id, 
+              tar.order_delivered_customer_date, 
+              tar.order_estimated_delivery_date,
+              geo.geolocation_state,
+              geo.geolocation_city,
+              date_diff(order_estimated_delivery_date,order_delivered_customer_date,day) as tahmin_edilen_ile_gerceklesen_arasindakifark, 
+              CASE 
+              WHEN date_diff(order_estimated_delivery_date,order_delivered_customer_date,day) < 0 THEN "Geç gönderim"
+              ELSE "Zamanında Teslim"
+              END AS GecikmeDurumu          
+from tarih_verileri as tar 
+JOIN `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` AS cust on tar.customer_id=cust.customer_id
+JOIN `project-42491229-3d06-45f9-908.olist.olist_geolocation_dataset` AS geo on cust.customer_zip_code_prefix=geo.geolocation_zip_code_prefix
+where order_status ="delivered"

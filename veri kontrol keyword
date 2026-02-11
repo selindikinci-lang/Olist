@@ -1,9 +1,10 @@
---tekrarlanan verileri ayıklama işlemi--
+
 SELECT customer_id 
 FROM `project-42491229-3d06-45f9-908.olist.olist_customers_dataset` 
 Group By customer_id
 Having count(customer_id) >1
 
+<<<<<<< Updated upstream
 SELECT order_id, customer_id, 
     date(order_purchase_timestamp), 
     date(order_approved_at), 
@@ -12,3 +13,6 @@ SELECT order_id, customer_id,
     date(order_estimated_delivery_date) 
 FROM `project-42491229-3d06-45f9-908.olist.olist_orders_dataset` 
 --tarih düzenleme--
+=======
+--tekrarlanan verileri ayıklama işlemi--
+>>>>>>> Stashed changes

@@ -5,3 +5,7 @@ FROM `project-42491229-3d06-45f9-908.olist.olist_order_payments_dataset`
 WHERE payment_value >= 0;
 
 
+CREATE TABLE `project-42491229-3d06-45f9-908.olist.olist_order_items_dataset_new`  AS
+SELECT *
+FROM `project-42491229-3d06-45f9-908.olist.olist_order_items_dataset` 
+WHERE price >= 0;
